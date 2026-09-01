@@ -1,0 +1,60 @@
+{
+  "generatedAt": "2026-07-21T09:42:16.847Z",
+  "platform": "darwin 24.2.0 arm64",
+  "cpu": "Apple M1",
+  "logicalCpus": 8,
+  "memoryBytes": 8589934592,
+  "node": "v20.20.2",
+  "circom": "circom2 npm 0.2.22 / Circom 2.2.2",
+  "proofSystem": "Groth16 over BN254",
+  "results": [
+    {
+      "name": "rcreate",
+      "constraints": 2826,
+      "publicInputs": 11,
+      "proverMedianMs": 235.137208,
+      "verifierMedianMs": 10.25125,
+      "proofJsonBytes": 722
+    },
+    {
+      "name": "rxfer_t2",
+      "constraints": 21198,
+      "publicInputs": 4,
+      "proverMedianMs": 1194.328167,
+      "verifierMedianMs": 10.813417,
+      "proofJsonBytes": 725
+    },
+    {
+      "name": "rval_t1",
+      "constraints": 3241,
+      "publicInputs": 12,
+      "proverMedianMs": 334.024125,
+      "verifierMedianMs": 10.852167,
+      "proofJsonBytes": 722
+    },
+    {
+      "name": "rval_t2",
+      "constraints": 88131,
+      "publicInputs": 12,
+      "proverMedianMs": 4472.37975,
+      "verifierMedianMs": 10.239958,
+      "proofJsonBytes": 723
+    },
+    {
+      "name": "ruse_t1",
+      "constraints": 5855,
+      "publicInputs": 17,
+      "proverMedianMs": 407.476542,
+      "verifierMedianMs": 8.378666,
+      "proofJsonBytes": 725
+    },
+    {
+      "name": "ruse_t2",
+      "constraints": 90876,
+      "publicInputs": 18,
+      "proverMedianMs": 4579.882916,
+      "verifierMedianMs": 8.639375,
+      "proofJsonBytes": 724
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# macOS
+.DS_Store
+
+# Temporary/editor files
+*.swp
+*.swo
+*~
+
+# Large proving-system artifacts
+build/*.ptau
+build/*.zkey
+build/*.wtns
+
+# Temporary/generated proof outputs
+build/proof_*.json
+build/public_*.json
+
+# Generated WASM directories inside build
+build/*_js/
+
+# Temporary build output
+build/out/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Circom generated artifacts
+*.r1cs
+*.sym
+*_js/

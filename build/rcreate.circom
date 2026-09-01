@@ -1,0 +1,71 @@
+pragma circom 2.1.6;
+
+include "circomlib/circuits/poseidon.circom";
+include "circomlib/circuits/comparators.circom";
+
+// Signatures are verified by the registry before this relation is evaluated.
+// The circuit binds the signed commitment to the catalog policy and initial state.
+template RCreate() {
+    signal input cm;
+    signal input assetId;
+    signal input epoch;
+    signal input allowedPurposes[8];
+
+    signal input tau;
+    signal input purpose;
+    signal input scope;
+    signal input expiry;
+    signal input cap;
+    signal input freq;
+    signal input accessType;
+    signal input incentive;
+    signal input payloadRef;
+    signal input policyHash;
+    signal input pkG;
+    signal input pkOwner;
+    signal input nfKeyHash;
+    signal input r;
+
+    component hAttr = Poseidon(8);
+    hAttr.inputs[0] <== purpose;
+    hAttr.inputs[1] <== scope;
+    hAttr.inputs[2] <== expiry;
+    hAttr.inputs[3] <== cap;
+    hAttr.inputs[4] <== freq;
+    hAttr.inputs[5] <== accessType;
+    hAttr.inputs[6] <== incentive;
+    hAttr.inputs[7] <== payloadRef;
+
+    component hCm = Poseidon(8);
+    hCm.inputs[0] <== tau;
+    hCm.inputs[1] <== hAttr.out;
+    hCm.inputs[2] <== policyHash;
+    hCm.inputs[3] <== pkG;
+    hCm.inputs[4] <== pkOwner;
+    hCm.inputs[5] <== nfKeyHash;
+    hCm.inputs[6] <== 2;
+    hCm.inputs[7] <== r;
+    hCm.out === cm;
+
+    component hPolicy = Poseidon(1);
+    hPolicy.inputs[0] <== assetId;
+    hPolicy.out === policyHash;
+
+    component notExpired = LessEqThan(32);
+    notExpired.in[0] <== epoch;
+    notExpired.in[1] <== expiry;
+    notExpired.out === 1;
+
+    signal sum[9];
+    sum[0] <== 0;
+    component eq[8];
+    for (var j = 0; j < 8; j++) {
+        eq[j] = IsEqual();
+        eq[j].in[0] <== purpose;
+        eq[j].in[1] <== allowedPurposes[j];
+        sum[j + 1] <== sum[j] + eq[j].out;
+    }
+    sum[8] === 1;
+}
+
+component main {public [cm, assetId, epoch, allowedPurposes]} = RCreate();

@@ -1,0 +1,19 @@
+{
+  "name": "pd-ctzb-prototype",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Circom prototype for the PD-CTZB consent relations",
+  "scripts": {
+    "compile": "node compile.js",
+    "fixtures": "node gen_inputs.js",
+    "test": "node test_all.js",
+    "benchmark": "node bench_all.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "circom2": "^0.2.22",
+    "circomlib": "^2.0.5",
+    "circomlibjs": "^0.1.7",
+    "snarkjs": "^0.7.6"
+  }
+}
